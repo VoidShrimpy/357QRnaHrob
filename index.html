@@ -11,20 +11,26 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Themes */
 body.svetly {
   --bg: #f7f3ec; --bg2: #ede8df; --text: #2a2218; --text-soft: #7a6e60;
-  --gold: #9a7d4a; --gold-light: #c9aa72; --border: #c9b99a;
-  --frame-outer: #b8a47e; --frame-inner: #e8dfc8; --shadow: rgba(60,40,10,0.13);
+  --gold: #9a7d4a; --gold-light: #c9aa72; --border: #c9b99a; --shadow: rgba(60,40,10,0.13);
 }
 body.tmavy {
   --bg: #141210; --bg2: #1e1a16; --text: #ede0cc; --text-soft: #9a8c7a;
-  --gold: #c9a85c; --gold-light: #e0c47a; --border: #4a3e2e;
-  --frame-outer: #5a4a32; --frame-inner: #2a2218; --shadow: rgba(0,0,0,0.5);
+  --gold: #c9a85c; --gold-light: #e0c47a; --border: #4a3e2e; --shadow: rgba(0,0,0,0.5);
 }
 
-body.pismo-klasicke  { --font-d: 'EB Garamond', Georgia, serif;           --font-b: 'EB Garamond', Georgia, serif; }
-body.pismo-elegantni { --font-d: 'Cinzel', 'Palatino Linotype', serif;    --font-b: 'Cormorant Garamond', Georgia, serif; }
-body.pismo-moderni   { --font-d: 'Cormorant Garamond', Georgia, serif;    --font-b: 'Cormorant Garamond', Georgia, serif; }
+/* Frame color presets */
+body.ramecek-zlata   { --frame-outer: #b8a47e; --frame-inner: #e8dfc8; }
+body.ramecek-stribrna{ --frame-outer: #909090; --frame-inner: #d8d8d8; }
+body.ramecek-bila    { --frame-outer: #ddd;    --frame-inner: #f5f5f5; }
+body.ramecek-cerna   { --frame-outer: #333;    --frame-inner: #666;    }
+
+/* Fonts */
+body.pismo-klasicke  { --font-d: 'EB Garamond', Georgia, serif;        --font-b: 'EB Garamond', Georgia, serif; }
+body.pismo-elegantni { --font-d: 'Cinzel', 'Palatino Linotype', serif; --font-b: 'Cormorant Garamond', Georgia, serif; }
+body.pismo-moderni   { --font-d: 'Cormorant Garamond', Georgia, serif; --font-b: 'Cormorant Garamond', Georgia, serif; }
 
 body {
   background: var(--bg);
@@ -39,8 +45,7 @@ body {
 
 body::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background-image:
     radial-gradient(ellipse at 20% 20%, rgba(180,150,80,0.07) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 80%, rgba(180,150,80,0.05) 0%, transparent 60%);
@@ -68,33 +73,34 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Corner ornaments as inline SVG via JS */
 .corner {
   position: absolute;
-  font-size: 10px;
-  color: var(--gold);
-  line-height: 1;
+  width: 10px; height: 10px;
   opacity: 0.7;
 }
-.corner.tl { top: 14px;    left: 14px;  }
-.corner.tr { top: 14px;    right: 14px; }
-.corner.bl { bottom: 14px; left: 14px;  }
-.corner.br { bottom: 14px; right: 14px; }
+.corner.tl { top: 12px;    left: 12px;  }
+.corner.tr { top: 12px;    right: 12px; }
+.corner.bl { bottom: 12px; left: 12px;  }
+.corner.br { bottom: 12px; right: 12px; }
 
-.symbol {
-  font-family: var(--font-d);
-  font-size: 1.4rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
+/* Symbol area */
+.symbol-wrap {
   margin-bottom: 22px;
   animation: fadeIn 1.4s ease both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
+.symbol-wrap svg { display: block; }
 
+/* Slider */
 .slider-wrap {
   position: relative;
   margin-bottom: 26px;
   animation: fadeIn 1.5s ease both;
 }
-
 .slider-frame {
   width: 100%;
   aspect-ratio: 4/3;
@@ -105,34 +111,24 @@ body::before {
   background: var(--bg);
   position: relative;
 }
-
 .slider-frame img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.7s ease;
 }
-
 .slider-frame img.active { opacity: 1; }
 
 .arrow {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 50%; transform: translateY(-50%);
   background: rgba(0,0,0,0.35);
-  color: #fff;
-  border: none;
-  width: 36px;
-  height: 36px;
+  color: #fff; border: none;
+  width: 36px; height: 36px;
   border-radius: 50%;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
   z-index: 2;
   transition: background 0.2s;
   backdrop-filter: blur(4px);
@@ -142,14 +138,11 @@ body::before {
 .arrow.right { right: 10px; }
 
 .dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 10px;
+  display: flex; justify-content: center;
+  gap: 6px; margin-top: 10px;
 }
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--border);
   cursor: pointer;
@@ -157,17 +150,14 @@ body::before {
 }
 .dot.active { background: var(--gold); transform: scale(1.3); }
 
+/* Ornament line */
 .ornament {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0 18px;
+  display: flex; align-items: center;
+  gap: 10px; margin: 20px 0 18px;
   animation: fadeIn 1.7s ease both;
 }
 .ornament::before, .ornament::after {
-  content: '';
-  flex: 1;
-  height: 1px;
+  content: ''; flex: 1; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
 }
 .ornament span { color: var(--gold); font-size: 13px; letter-spacing: 4px; }
@@ -204,28 +194,88 @@ h1 {
 </style>
 </head>
 <body>
-<div class="card" id="card">
-  <span class="corner tl">&#10022;</span>
-  <span class="corner tr">&#10022;</span>
-  <span class="corner bl">&#10022;</span>
-  <span class="corner br">&#10022;</span>
-</div>
+<div class="card" id="card"></div>
 
 <script src="config.js"></script>
 <script>
 (function () {
   var c = CONFIG;
-  var tema  = (c.tema === 'tmavy') ? 'tmavy' : 'svetly';
-  var pismo = (['klasicke','elegantni','moderni'].indexOf(c.pismo) >= 0) ? c.pismo : 'elegantni';
-  document.body.className = tema + ' pismo-' + pismo;
+
+  // Classes
+  var tema    = (c.tema === 'tmavy') ? 'tmavy' : 'svetly';
+  var pismo   = (['klasicke','elegantni','moderni'].indexOf(c.pismo) >= 0) ? c.pismo : 'elegantni';
+  var ramecek = (['zlata','stribrna','bila','cerna'].indexOf(c.ramecek) >= 0) ? c.ramecek : 'zlata';
+  document.body.className = tema + ' pismo-' + pismo + ' ramecek-' + ramecek;
   document.title = c.jmeno || 'Pietni stranka';
 
-  var card = document.getElementById('card');
-  var corners = card.innerHTML;
-  var html = corners;
+  // Custom colors override
+  if (c.barvaPozadi) document.body.style.setProperty('--bg',   c.barvaPozadi);
+  if (c.barvaKarty)  document.body.style.setProperty('--bg2',  c.barvaKarty);
+  if (c.barvaTextu)  document.body.style.setProperty('--text', c.barvaTextu);
 
-  // Kriz - textovy symbol bez emoji
-  html += '<div class="symbol">\u271D \u00B7 \u271D</div>';
+  // Gold color from frame for SVG
+  var goldColor = getComputedStyle(document.body).getPropertyValue('--gold').trim() || '#9a7d4a';
+
+  // SVG helpers – drawn shapes, no emoji, works on all iOS
+  function svgKriz(size, color) {
+    var s = size || 22; var col = color || goldColor;
+    var w = 3;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      + '<rect x="' + (11-w/2) + '" y="1" width="' + w + '" height="20" rx="1" fill="' + col + '"/>'
+      + '<rect x="1" y="' + (7-w/2) + '" width="20" height="' + w + '" rx="1" fill="' + col + '"/>'
+      + '</svg>';
+  }
+
+  function svgKriz2(size, color) {
+    // Patriarchal cross (double crossbar)
+    var s = size || 24; var col = color || goldColor; var w = 2.5;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      + '<rect x="' + (12-w/2) + '" y="1" width="' + w + '" height="22" rx="1" fill="' + col + '"/>'
+      + '<rect x="2"  y="' + (8-w/2)  + '" width="20" height="' + w + '" rx="1" fill="' + col + '"/>'
+      + '<rect x="5"  y="' + (14-w/2) + '" width="14" height="' + w + '" rx="1" fill="' + col + '"/>'
+      + '</svg>';
+  }
+
+  function svgHvezda(size, color) {
+    var s = size || 22; var col = color || goldColor;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 22 22" fill="' + col + '" xmlns="http://www.w3.org/2000/svg">'
+      + '<polygon points="11,1 13.5,8 21,8 15,13 17.5,20 11,15.5 4.5,20 7,13 1,8 8.5,8" />'
+      + '</svg>';
+  }
+
+  function svgRohova(color) {
+    var col = color || goldColor;
+    return '<svg width="10" height="10" viewBox="0 0 10 10" fill="' + col + '" xmlns="http://www.w3.org/2000/svg">'
+      + '<circle cx="5" cy="5" r="1.5"/>'
+      + '<circle cx="1.5" cy="1.5" r="1"/>'
+      + '<circle cx="8.5" cy="1.5" r="1"/>'
+      + '<circle cx="1.5" cy="8.5" r="1"/>'
+      + '<circle cx="8.5" cy="8.5" r="1"/>'
+      + '</svg>';
+  }
+
+  // Build symbol HTML
+  function buildSymbol() {
+    var dot = '<span style="color:' + goldColor + ';font-size:0.5rem;line-height:22px;vertical-align:middle;">&bull;</span>';
+    if (c.symbol === 'kriz2') return svgKriz2(24, goldColor) + dot + svgKriz2(24, goldColor);
+    if (c.symbol === 'hvezda') return svgHvezda(22, goldColor) + dot + svgHvezda(22, goldColor);
+    if (c.symbol === 'bez') return '';
+    return svgKriz(22, goldColor) + dot + svgKriz(22, goldColor); // default
+  }
+
+  var card = document.getElementById('card');
+  var html = '';
+
+  // Corner ornaments
+  var ro = svgRohova(goldColor);
+  html += '<span class="corner tl">' + ro + '</span>';
+  html += '<span class="corner tr">' + ro + '</span>';
+  html += '<span class="corner bl">' + ro + '</span>';
+  html += '<span class="corner br">' + ro + '</span>';
+
+  // Symbol
+  var sym = buildSymbol();
+  if (sym) html += '<div class="symbol-wrap">' + sym + '</div>';
 
   // Fotky
   var fotky = [];
@@ -242,8 +292,8 @@ h1 {
     }
     html += '</div>';
     if (fotky.length > 1) {
-      html += '<button class="arrow left" id="al" onclick="slide(-1)">&#8592;</button>';
-      html += '<button class="arrow right" id="ar" onclick="slide(1)">&#8594;</button>';
+      html += '<button class="arrow left" onclick="slide(-1)">&#8592;</button>';
+      html += '<button class="arrow right" onclick="slide(1)">&#8594;</button>';
       html += '<div class="dots">';
       for (var j = 0; j < fotky.length; j++) {
         html += '<div class="dot' + (j === 0 ? ' active' : '') + '" onclick="goTo(' + j + ')"></div>';
@@ -254,7 +304,7 @@ h1 {
   }
 
   // Ornament
-  html += '<div class="ornament"><span>\u00B7 \u00B7 \u00B7</span></div>';
+  html += '<div class="ornament"><span>&middot; &middot; &middot;</span></div>';
 
   // Jmeno
   html += '<h1>' + (c.jmeno || '') + '</h1>';
@@ -262,25 +312,26 @@ h1 {
   // Datumy
   var d = '';
   if (c.narozeni) d += '* ' + c.narozeni;
-  if (c.narozeni && c.umrti) d += '  ~  ';
-  if (c.umrti) d += '\u2020 ' + c.umrti;
+  if (c.narozeni && c.umrti) d += '&nbsp;&nbsp;~&nbsp;&nbsp;';
+  if (c.umrti) d += '&#8224; ' + c.umrti;
   if (d) html += '<div class="dates">' + d + '</div>';
 
   // Venovani
   if (c.text) {
-    html += '<div class="ornament" style="margin-top:18px"><span>\u00B7 \u00B7 \u00B7</span></div>';
+    html += '<div class="ornament" style="margin-top:18px"><span>&middot; &middot; &middot;</span></div>';
     html += '<div class="venovani">' + c.text.replace(/\n/g, '<br>') + '</div>';
   }
 
   card.innerHTML = html;
 
-  // Slider logika
+  // Slider
   var cur = 0;
-  var imgs = document.querySelectorAll('#sf img');
+  var imgs   = document.querySelectorAll('#sf img');
   var dotsEl = document.querySelectorAll('.dot');
-  var total = imgs.length;
+  var total  = imgs.length;
 
   function goTo(n) {
+    if (!total) return;
     imgs[cur].classList.remove('active');
     if (dotsEl[cur]) dotsEl[cur].classList.remove('active');
     cur = (n + total) % total;
@@ -288,13 +339,13 @@ h1 {
     if (dotsEl[cur]) dotsEl[cur].classList.add('active');
   }
 
-  window.goTo = goTo;
+  window.goTo  = goTo;
   window.slide = function(dir) { goTo(cur + dir); };
 
   // Swipe
   var tx = null;
   document.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; });
-  document.addEventListener('touchend', function(e) {
+  document.addEventListener('touchend',   function(e) {
     if (tx === null) return;
     var dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 40) window.slide(dx < 0 ? 1 : -1);
