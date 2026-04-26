@@ -5,14 +5,14 @@
 var CONFIG = {
 
   // --- Základní údaje ---
-  jmeno:    "Jan Novák",
+  jmeno:    "Jarmila Nováková",
   narozeni: "1. března 1942",
   umrti:    "14. listopadu 2023",
   text:     "Navždy v našich srdcích a vzpomínkách.\nByl jsi oporou celé rodiny.\nChybíš nám každý den.",
 
   // --- Fotky ---
   fotky: [
-    "fotka1.jpg",
+    "CBB0B9A6-68F3-43C4-899A-649E1D0053BA.JPG",
     // "fotka2.jpg",
   ],
 
@@ -27,7 +27,7 @@ var CONFIG = {
 
   // --- Písmo ---
   // "klasicke" / "elegantni" / "moderni"
-  pismo: "elegantni",
+  pismo: "moderni",
 
 
   // --- Symbol nad fotkou ---
@@ -40,7 +40,7 @@ var CONFIG = {
 
   // --- Rohy karty ---
   // Tvar: "tecka" / "kvetina" / "kriz" / "bez"
-  rohTvar: "tecka",
+  rohTvar: "kvetina",
 
   // Kde zobrazit rohy: "vsechny" / "jen_nahore" / "jen_dole" / "bez"
   rohPoloha: "vsechny",
@@ -48,7 +48,7 @@ var CONFIG = {
 
   // --- Rámeček stránky (vnější okraj karty) ---
   // Barva: "zlata" / "stribrna" / "bila" / "cerna"
-  ramecekBarva: "zlata",
+  ramecekBarva: "stribrna",
 
   // Styl: "dvojity" / "jednoduchy" / "bez"
   ramecekStyl: "dvojity",
