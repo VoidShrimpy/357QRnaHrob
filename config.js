@@ -25,7 +25,7 @@ var CONFIG = {
   //   2. Klikněte na ni, pak "Raw" – zkopírujte URL
   // Nebo použijte base64: "data:image/jpeg;base64,ZDE..."
   fotky: [
-    "fotka1.jpg",   // název souboru nahraného do stejné složky na GitHubu
+    "IMG_20220903_143725.jpg",   // název souboru nahraného do stejné složky na GitHubu
     // "fotka2.jpg",   // další fotka – odkomentujte přidáním // na začátek
   ],
 
