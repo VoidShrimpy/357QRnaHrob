@@ -11,7 +11,6 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Themes */
 body.svetly {
   --bg: #f7f3ec; --bg2: #ede8df; --text: #2a2218; --text-soft: #7a6e60;
   --gold: #9a7d4a; --gold-light: #c9aa72; --border: #c9b99a; --shadow: rgba(60,40,10,0.13);
@@ -21,13 +20,11 @@ body.tmavy {
   --gold: #c9a85c; --gold-light: #e0c47a; --border: #4a3e2e; --shadow: rgba(0,0,0,0.5);
 }
 
-/* Frame color presets */
-body.ramecek-zlata   { --frame-outer: #b8a47e; --frame-inner: #e8dfc8; }
-body.ramecek-stribrna{ --frame-outer: #909090; --frame-inner: #d8d8d8; }
-body.ramecek-bila    { --frame-outer: #ddd;    --frame-inner: #f5f5f5; }
-body.ramecek-cerna   { --frame-outer: #333;    --frame-inner: #666;    }
+body.ramecek-zlata    { --fo: #b8a47e; --fi: #e8dfc8; }
+body.ramecek-stribrna { --fo: #909090; --fi: #d8d8d8; }
+body.ramecek-bila     { --fo: #cccccc; --fi: #f0f0f0; }
+body.ramecek-cerna    { --fo: #333333; --fi: #666666; }
 
-/* Fonts */
 body.pismo-klasicke  { --font-d: 'EB Garamond', Georgia, serif;        --font-b: 'EB Garamond', Georgia, serif; }
 body.pismo-elegantni { --font-d: 'Cinzel', 'Palatino Linotype', serif; --font-b: 'Cormorant Garamond', Georgia, serif; }
 body.pismo-moderni   { --font-d: 'Cormorant Garamond', Georgia, serif; --font-b: 'Cormorant Garamond', Georgia, serif; }
@@ -37,35 +34,36 @@ body {
   color: var(--text);
   font-family: var(--font-b);
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   padding: 32px 16px;
 }
 
 body::before {
-  content: '';
-  position: fixed; inset: 0;
+  content: ''; position: fixed; inset: 0;
   background-image:
     radial-gradient(ellipse at 20% 20%, rgba(180,150,80,0.07) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 80%, rgba(180,150,80,0.05) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+  pointer-events: none; z-index: 0;
 }
 
+/* Card */
 .card {
-  position: relative;
-  z-index: 1;
-  max-width: 440px;
-  width: 100%;
+  position: relative; z-index: 1;
+  max-width: 440px; width: 100%;
   background: var(--bg2);
   text-align: center;
-  border: 1px solid var(--frame-outer);
-  outline: 4px solid var(--frame-inner);
-  outline-offset: -8px;
-  box-shadow: 0 0 0 8px var(--frame-outer), 0 8px 40px var(--shadow), inset 0 0 60px rgba(0,0,0,0.03);
   padding: 40px 32px 36px;
   animation: fadeIn 1.2s ease both;
+}
+.card.ramecek-dvojity {
+  border: 1px solid var(--fo);
+  outline: 4px solid var(--fi);
+  outline-offset: -8px;
+  box-shadow: 0 0 0 8px var(--fo), 0 8px 40px var(--shadow), inset 0 0 60px rgba(0,0,0,0.03);
+}
+.card.ramecek-jednoduchy {
+  border: 2px solid var(--fo);
+  box-shadow: 0 8px 40px var(--shadow);
 }
 
 @keyframes fadeIn {
@@ -73,39 +71,33 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Corner ornaments as inline SVG via JS */
+/* Corners */
 .corner {
   position: absolute;
-  width: 10px; height: 10px;
-  opacity: 0.7;
+  width: 12px; height: 12px;
+  opacity: 0.75;
 }
 .corner.tl { top: 12px;    left: 12px;  }
 .corner.tr { top: 12px;    right: 12px; }
 .corner.bl { bottom: 12px; left: 12px;  }
 .corner.br { bottom: 12px; right: 12px; }
 
-/* Symbol area */
+/* Symbol */
 .symbol-wrap {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
   animation: fadeIn 1.4s ease both;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
 }
-.symbol-wrap svg { display: block; }
 
 /* Slider */
 .slider-wrap {
-  position: relative;
-  margin-bottom: 26px;
+  position: relative; margin-bottom: 22px;
   animation: fadeIn 1.5s ease both;
 }
 .slider-frame {
   width: 100%;
   aspect-ratio: 4/3;
   overflow: hidden;
-  border-radius: 12px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 20px var(--shadow);
   background: var(--bg);
@@ -115,37 +107,46 @@ body::before {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.7s ease;
+  opacity: 0; transition: opacity 0.7s ease;
 }
 .slider-frame img.active { opacity: 1; }
 
+/* Arrow styles */
 .arrow {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  background: rgba(0,0,0,0.35);
-  color: #fff; border: none;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  font-size: 16px; cursor: pointer;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  border: none; cursor: pointer; z-index: 2;
   display: flex; align-items: center; justify-content: center;
-  z-index: 2;
-  transition: background 0.2s;
+  transition: opacity 0.2s;
+}
+.arrow:hover { opacity: 0.8; }
+.arrow.left  { left: 8px; }
+.arrow.right { right: 8px; }
+
+/* kruhy style */
+.arrow-kruhy {
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  font-size: 15px;
   backdrop-filter: blur(4px);
 }
-.arrow:hover { background: rgba(0,0,0,0.6); }
-.arrow.left  { left: 10px; }
-.arrow.right { right: 10px; }
+/* sipky style */
+.arrow-sipky {
+  background: none;
+  color: #fff;
+  width: 34px; height: 34px;
+  font-size: 22px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
 
 .dots {
   display: flex; justify-content: center;
-  gap: 6px; margin-top: 10px;
+  gap: 6px; margin-top: 8px;
 }
 .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--border);
-  cursor: pointer;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border); cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
 .dot.active { background: var(--gold); transform: scale(1.3); }
@@ -153,36 +154,47 @@ body::before {
 /* Ornament line */
 .ornament {
   display: flex; align-items: center;
-  gap: 10px; margin: 20px 0 18px;
+  gap: 10px; margin: 18px 0 16px;
   animation: fadeIn 1.7s ease both;
 }
 .ornament::before, .ornament::after {
   content: ''; flex: 1; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
 }
-.ornament span { color: var(--gold); font-size: 13px; letter-spacing: 4px; }
+.ornament span { color: var(--gold); font-size: 12px; letter-spacing: 4px; }
 
+/* Name */
 h1 {
   font-family: var(--font-d);
   font-size: clamp(1.4rem, 5vw, 1.9rem);
   font-weight: 400;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   line-height: 1.3;
   animation: fadeIn 1.8s ease both;
 }
+h1.velka_pismena { text-transform: uppercase; }
+h1.kurziva       { font-style: italic; text-transform: none; }
+h1.normalni      { text-transform: none; }
 
+.jmeno-linka {
+  width: 60px; height: 1px;
+  background: var(--gold-light);
+  margin: 6px auto 10px;
+}
+
+/* Dates */
 .dates {
   font-family: var(--font-b);
   font-size: 1.05rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--text-soft);
   font-style: italic;
   animation: fadeIn 1.9s ease both;
 }
 
+/* Text */
 .venovani {
   font-family: var(--font-b);
   font-size: 1rem;
@@ -201,83 +213,117 @@ h1 {
 (function () {
   var c = CONFIG;
 
-  // Classes
-  var tema    = (c.tema === 'tmavy') ? 'tmavy' : 'svetly';
-  var pismo   = (['klasicke','elegantni','moderni'].indexOf(c.pismo) >= 0) ? c.pismo : 'elegantni';
-  var ramecek = (['zlata','stribrna','bila','cerna'].indexOf(c.ramecek) >= 0) ? c.ramecek : 'zlata';
-  document.body.className = tema + ' pismo-' + pismo + ' ramecek-' + ramecek;
+  // Defaults
+  var tema      = c.tema === 'tmavy' ? 'tmavy' : 'svetly';
+  var pismo     = ['klasicke','elegantni','moderni'].indexOf(c.pismo) >= 0 ? c.pismo : 'elegantni';
+  var ramBarva  = ['zlata','stribrna','bila','cerna'].indexOf(c.ramecekBarva) >= 0 ? c.ramecekBarva : 'zlata';
+  var ramStyl   = ['dvojity','jednoduchy','bez'].indexOf(c.ramecekStyl) >= 0 ? c.ramecekStyl : 'dvojity';
+
+  document.body.className = tema + ' pismo-' + pismo + ' ramecek-' + ramBarva;
   document.title = c.jmeno || 'Pietni stranka';
 
-  // Custom colors override
+  // Custom colors
   if (c.barvaPozadi) document.body.style.setProperty('--bg',   c.barvaPozadi);
   if (c.barvaKarty)  document.body.style.setProperty('--bg2',  c.barvaKarty);
   if (c.barvaTextu)  document.body.style.setProperty('--text', c.barvaTextu);
 
-  // Gold color from frame for SVG
-  var goldColor = getComputedStyle(document.body).getPropertyValue('--gold').trim() || '#9a7d4a';
-
-  // SVG helpers – drawn shapes, no emoji, works on all iOS
-  function svgKriz(size, color) {
-    var s = size || 22; var col = color || goldColor;
-    var w = 3;
-    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">'
-      + '<rect x="' + (11-w/2) + '" y="1" width="' + w + '" height="20" rx="1" fill="' + col + '"/>'
-      + '<rect x="1" y="' + (7-w/2) + '" width="20" height="' + w + '" rx="1" fill="' + col + '"/>'
-      + '</svg>';
-  }
-
-  function svgKriz2(size, color) {
-    // Patriarchal cross (double crossbar)
-    var s = size || 24; var col = color || goldColor; var w = 2.5;
-    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'
-      + '<rect x="' + (12-w/2) + '" y="1" width="' + w + '" height="22" rx="1" fill="' + col + '"/>'
-      + '<rect x="2"  y="' + (8-w/2)  + '" width="20" height="' + w + '" rx="1" fill="' + col + '"/>'
-      + '<rect x="5"  y="' + (14-w/2) + '" width="14" height="' + w + '" rx="1" fill="' + col + '"/>'
-      + '</svg>';
-  }
-
-  function svgHvezda(size, color) {
-    var s = size || 22; var col = color || goldColor;
-    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 22 22" fill="' + col + '" xmlns="http://www.w3.org/2000/svg">'
-      + '<polygon points="11,1 13.5,8 21,8 15,13 17.5,20 11,15.5 4.5,20 7,13 1,8 8.5,8" />'
-      + '</svg>';
-  }
-
-  function svgRohova(color) {
-    var col = color || goldColor;
-    return '<svg width="10" height="10" viewBox="0 0 10 10" fill="' + col + '" xmlns="http://www.w3.org/2000/svg">'
-      + '<circle cx="5" cy="5" r="1.5"/>'
-      + '<circle cx="1.5" cy="1.5" r="1"/>'
-      + '<circle cx="8.5" cy="1.5" r="1"/>'
-      + '<circle cx="1.5" cy="8.5" r="1"/>'
-      + '<circle cx="8.5" cy="8.5" r="1"/>'
-      + '</svg>';
-  }
-
-  // Build symbol HTML
-  function buildSymbol() {
-    var dot = '<span style="color:' + goldColor + ';font-size:0.5rem;line-height:22px;vertical-align:middle;">&bull;</span>';
-    if (c.symbol === 'kriz2') return svgKriz2(24, goldColor) + dot + svgKriz2(24, goldColor);
-    if (c.symbol === 'hvezda') return svgHvezda(22, goldColor) + dot + svgHvezda(22, goldColor);
-    if (c.symbol === 'bez') return '';
-    return svgKriz(22, goldColor) + dot + svgKriz(22, goldColor); // default
-  }
-
   var card = document.getElementById('card');
-  var html = '';
+  if (ramStyl !== 'bez') card.classList.add('ramecek-' + ramStyl);
 
-  // Corner ornaments
-  var ro = svgRohova(goldColor);
-  html += '<span class="corner tl">' + ro + '</span>';
-  html += '<span class="corner tr">' + ro + '</span>';
-  html += '<span class="corner bl">' + ro + '</span>';
-  html += '<span class="corner br">' + ro + '</span>';
+  // Compute gold after CSS applied
+  var gold = getComputedStyle(document.body).getPropertyValue('--gold').trim() || '#9a7d4a';
+
+  // ── SVG helpers ──────────────────────────────────────────
+
+  function svgKriz(size, col) {
+    var s = size || 22; col = col || gold; var w = 3;
+    return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      +'<rect x="'+(11-w/2)+'" y="1" width="'+w+'" height="20" rx="1" fill="'+col+'"/>'
+      +'<rect x="1" y="'+(7-w/2)+'" width="20" height="'+w+'" rx="1" fill="'+col+'"/>'
+      +'</svg>';
+  }
+
+  function svgKriz2(size, col) {
+    var s = size || 24; col = col || gold; var w = 2.5;
+    return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      +'<rect x="'+(12-w/2)+'" y="1" width="'+w+'" height="22" rx="1" fill="'+col+'"/>'
+      +'<rect x="2" y="'+(8-w/2)+'" width="20" height="'+w+'" rx="1" fill="'+col+'"/>'
+      +'<rect x="5" y="'+(14-w/2)+'" width="14" height="'+w+'" rx="1" fill="'+col+'"/>'
+      +'</svg>';
+  }
+
+  function svgHvezda(size, col) {
+    var s = size || 22; col = col || gold;
+    return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 22 22" fill="'+col+'" xmlns="http://www.w3.org/2000/svg">'
+      +'<polygon points="11,1 13.5,8 21,8 15,13 17.5,20 11,15.5 4.5,20 7,13 1,8 8.5,8"/>'
+      +'</svg>';
+  }
+
+  function svgRohTecka(col) {
+    col = col || gold;
+    return '<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">'
+      +'<circle cx="6" cy="6" r="2" fill="'+col+'"/>'
+      +'<circle cx="1.5" cy="1.5" r="1" fill="'+col+'" opacity="0.6"/>'
+      +'<circle cx="10.5" cy="1.5" r="1" fill="'+col+'" opacity="0.6"/>'
+      +'<circle cx="1.5" cy="10.5" r="1" fill="'+col+'" opacity="0.6"/>'
+      +'<circle cx="10.5" cy="10.5" r="1" fill="'+col+'" opacity="0.6"/>'
+      +'</svg>';
+  }
+
+  function svgRohKvetina(col) {
+    col = col || gold;
+    return '<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">'
+      +'<circle cx="6" cy="6" r="1.5" fill="'+col+'"/>'
+      +'<circle cx="6" cy="2.5" r="1.2" fill="'+col+'" opacity="0.7"/>'
+      +'<circle cx="6" cy="9.5" r="1.2" fill="'+col+'" opacity="0.7"/>'
+      +'<circle cx="2.5" cy="6" r="1.2" fill="'+col+'" opacity="0.7"/>'
+      +'<circle cx="9.5" cy="6" r="1.2" fill="'+col+'" opacity="0.7"/>'
+      +'</svg>';
+  }
+
+  function svgRohKriz(col) {
+    col = col || gold; var w = 1.5;
+    return '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      +'<rect x="'+(6-w/2)+'" y="1" width="'+w+'" height="10" rx="0.5" fill="'+col+'"/>'
+      +'<rect x="1" y="'+(4.5-w/2)+'" width="10" height="'+w+'" rx="0.5" fill="'+col+'"/>'
+      +'</svg>';
+  }
+
+  function getRohSvg() {
+    var t = c.rohTvar || 'tecka';
+    if (t === 'kvetina') return svgRohKvetina(gold);
+    if (t === 'kriz')    return svgRohKriz(gold);
+    if (t === 'bez')     return '';
+    return svgRohTecka(gold);
+  }
+
+  // ── Build page ───────────────────────────────────────────
+
+  var html = '';
+  var rohSvg  = getRohSvg();
+  var rohPos  = c.rohPoloha || 'vsechny';
+
+  if (rohSvg) {
+    if (rohPos === 'vsechny' || rohPos === 'jen_nahore') {
+      html += '<span class="corner tl">'+rohSvg+'</span>';
+      html += '<span class="corner tr">'+rohSvg+'</span>';
+    }
+    if (rohPos === 'vsechny' || rohPos === 'jen_dole') {
+      html += '<span class="corner bl">'+rohSvg+'</span>';
+      html += '<span class="corner br">'+rohSvg+'</span>';
+    }
+  }
 
   // Symbol
-  var sym = buildSymbol();
-  if (sym) html += '<div class="symbol-wrap">' + sym + '</div>';
+  var sym = c.symbol || 'kriz';
+  if (sym !== 'bez') {
+    var symSvg = sym === 'kriz2'   ? svgKriz2(24, gold)
+               : sym === 'hvezda'  ? svgHvezda(22, gold)
+               :                     svgKriz(22, gold);
+    html += '<div class="symbol-wrap">'+symSvg+'</div>';
+  }
 
-  // Fotky
+  // Photos
   var fotky = [];
   if (c.fotky && c.fotky.length) {
     for (var x = 0; x < c.fotky.length; x++) {
@@ -285,18 +331,23 @@ h1 {
     }
   }
 
+  var zaobleni = (typeof c.fotkaZaobleni === 'number') ? c.fotkaZaobleni : 8;
+  var sipky    = c.sipkyStyl || 'kruhy';
+
   if (fotky.length > 0) {
-    html += '<div class="slider-wrap"><div class="slider-frame" id="sf">';
+    html += '<div class="slider-wrap">';
+    html += '<div class="slider-frame" id="sf" style="border-radius:'+zaobleni+'px">';
     for (var i = 0; i < fotky.length; i++) {
-      html += '<img src="' + fotky[i] + '" alt=""' + (i === 0 ? ' class="active"' : '') + '>';
+      html += '<img src="'+fotky[i]+'" alt=""'+(i===0?' class="active"':'')+' loading="lazy">';
     }
     html += '</div>';
-    if (fotky.length > 1) {
-      html += '<button class="arrow left" onclick="slide(-1)">&#8592;</button>';
-      html += '<button class="arrow right" onclick="slide(1)">&#8594;</button>';
+    if (fotky.length > 1 && sipky !== 'bez') {
+      var cls = 'arrow-' + sipky;
+      html += '<button class="arrow left '+cls+'" onclick="slide(-1)">&#8592;</button>';
+      html += '<button class="arrow right '+cls+'" onclick="slide(1)">&#8594;</button>';
       html += '<div class="dots">';
       for (var j = 0; j < fotky.length; j++) {
-        html += '<div class="dot' + (j === 0 ? ' active' : '') + '" onclick="goTo(' + j + ')"></div>';
+        html += '<div class="dot'+(j===0?' active':'')+'" onclick="goTo('+j+')"></div>';
       }
       html += '</div>';
     }
@@ -304,28 +355,40 @@ h1 {
   }
 
   // Ornament
-  html += '<div class="ornament"><span>&middot; &middot; &middot;</span></div>';
+  if (c.cary !== 'ne') {
+    html += '<div class="ornament"><span>&middot; &middot; &middot;</span></div>';
+  } else {
+    html += '<div style="margin-top:16px"></div>';
+  }
 
-  // Jmeno
-  html += '<h1>' + (c.jmeno || '') + '</h1>';
+  // Name
+  var jStyl = ['velka_pismena','normalni','kurziva'].indexOf(c.jmenoStyl) >= 0 ? c.jmenoStyl : 'velka_pismena';
+  html += '<h1 class="'+jStyl+'">'+(c.jmeno||'')+'</h1>';
+  if (c.jmenoPodtrzeni !== 'ne') {
+    html += '<div class="jmeno-linka"></div>';
+  }
 
-  // Datumy
+  // Dates
   var d = '';
   if (c.narozeni) d += '* ' + c.narozeni;
   if (c.narozeni && c.umrti) d += '&nbsp;&nbsp;~&nbsp;&nbsp;&#8224;&nbsp;' + c.umrti;
-  else if (c.umrti) d += '&#8224; ' + c.umrti;
-  if (d) html += '<div class="dates">' + d + '</div>';
+  else if (c.umrti)          d += '&#8224; ' + c.umrti;
+  if (d) html += '<div class="dates">'+d+'</div>';
 
-  // Venovani
+  // Text
   if (c.text) {
-    html += '<div class="ornament" style="margin-top:18px"><span>&middot; &middot; &middot;</span></div>';
-    html += '<div class="venovani">' + c.text.replace(/\n/g, '<br>') + '</div>';
+    if (c.cary !== 'ne') {
+      html += '<div class="ornament" style="margin-top:16px"><span>&middot; &middot; &middot;</span></div>';
+    } else {
+      html += '<div style="margin-top:14px"></div>';
+    }
+    html += '<div class="venovani">'+c.text.replace(/\n/g,'<br>')+'</div>';
   }
 
   card.innerHTML = html;
 
-  // Slider
-  var cur = 0;
+  // ── Slider logic ─────────────────────────────────────────
+  var cur    = 0;
   var imgs   = document.querySelectorAll('#sf img');
   var dotsEl = document.querySelectorAll('.dot');
   var total  = imgs.length;
@@ -338,7 +401,6 @@ h1 {
     imgs[cur].classList.add('active');
     if (dotsEl[cur]) dotsEl[cur].classList.add('active');
   }
-
   window.goTo  = goTo;
   window.slide = function(dir) { goTo(cur + dir); };
 
