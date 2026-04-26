@@ -4,50 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Pietní stránka</title>
+<title>Pietni stranka</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── Themes ── */
 body.svetly {
-  --bg:         #f7f3ec;
-  --bg2:        #ede8df;
-  --text:       #2a2218;
-  --text-soft:  #7a6e60;
-  --gold:       #9a7d4a;
-  --gold-light: #c9aa72;
-  --border:     #c9b99a;
-  --frame-outer:#b8a47e;
-  --frame-inner:#e8dfc8;
-  --shadow:     rgba(60,40,10,0.13);
+  --bg: #f7f3ec; --bg2: #ede8df; --text: #2a2218; --text-soft: #7a6e60;
+  --gold: #9a7d4a; --gold-light: #c9aa72; --border: #c9b99a;
+  --frame-outer: #b8a47e; --frame-inner: #e8dfc8; --shadow: rgba(60,40,10,0.13);
 }
 body.tmavy {
-  --bg:         #141210;
-  --bg2:        #1e1a16;
-  --text:       #ede0cc;
-  --text-soft:  #9a8c7a;
-  --gold:       #c9a85c;
-  --gold-light: #e0c47a;
-  --border:     #4a3e2e;
-  --frame-outer:#5a4a32;
-  --frame-inner:#2a2218;
-  --shadow:     rgba(0,0,0,0.5);
+  --bg: #141210; --bg2: #1e1a16; --text: #ede0cc; --text-soft: #9a8c7a;
+  --gold: #c9a85c; --gold-light: #e0c47a; --border: #4a3e2e;
+  --frame-outer: #5a4a32; --frame-inner: #2a2218; --shadow: rgba(0,0,0,0.5);
 }
 
-/* ── Fonts ── */
-body.pismo-klasicke  { --font-display: 'EB Garamond', Georgia, serif; --font-body: 'EB Garamond', Georgia, serif; }
-body.pismo-elegantni { --font-display: 'Cinzel', 'Palatino Linotype', serif; --font-body: 'Cormorant Garamond', Georgia, serif; }
-body.pismo-moderni   { --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'Cormorant Garamond', Georgia, serif; }
+body.pismo-klasicke  { --font-d: 'EB Garamond', Georgia, serif;           --font-b: 'EB Garamond', Georgia, serif; }
+body.pismo-elegantni { --font-d: 'Cinzel', 'Palatino Linotype', serif;    --font-b: 'Cormorant Garamond', Georgia, serif; }
+body.pismo-moderni   { --font-d: 'Cormorant Garamond', Georgia, serif;    --font-b: 'Cormorant Garamond', Georgia, serif; }
 
-/* ── Base ── */
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font-b);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -55,7 +37,6 @@ body {
   padding: 32px 16px;
 }
 
-/* ── Outer page texture ── */
 body::before {
   content: '';
   position: fixed;
@@ -67,7 +48,6 @@ body::before {
   z-index: 0;
 }
 
-/* ── Card ── */
 .card {
   position: relative;
   z-index: 1;
@@ -75,16 +55,10 @@ body::before {
   width: 100%;
   background: var(--bg2);
   text-align: center;
-
-  /* Decorative double border frame */
   border: 1px solid var(--frame-outer);
   outline: 4px solid var(--frame-inner);
   outline-offset: -8px;
-  box-shadow:
-    0 0 0 8px var(--frame-outer),
-    0 8px 40px var(--shadow),
-    inset 0 0 60px rgba(0,0,0,0.03);
-
+  box-shadow: 0 0 0 8px var(--frame-outer), 0 8px 40px var(--shadow), inset 0 0 60px rgba(0,0,0,0.03);
   padding: 40px 32px 36px;
   animation: fadeIn 1.2s ease both;
 }
@@ -94,32 +68,27 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Corner ornaments ── */
-.card::before, .card::after,
-.card-corner-bl, .card-corner-br {
-  content: '✦';
+.corner {
   position: absolute;
   font-size: 10px;
   color: var(--gold);
   line-height: 1;
   opacity: 0.7;
 }
-.card::before  { top: 14px;    left: 14px;  }
-.card::after   { top: 14px;    right: 14px; }
-.card-corner-bl { bottom: 14px; left: 14px;  }
-.card-corner-br { bottom: 14px; right: 14px; }
+.corner.tl { top: 14px;    left: 14px;  }
+.corner.tr { top: 14px;    right: 14px; }
+.corner.bl { bottom: 14px; left: 14px;  }
+.corner.br { bottom: 14px; right: 14px; }
 
-/* ── Symbol ── */
 .symbol {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-family: var(--font-d);
+  font-size: 1.4rem;
   color: var(--gold);
   letter-spacing: 0.15em;
   margin-bottom: 22px;
   animation: fadeIn 1.4s ease both;
 }
 
-/* ── Photo slider ── */
 .slider-wrap {
   position: relative;
   margin-bottom: 26px;
@@ -130,7 +99,7 @@ body::before {
   width: 100%;
   aspect-ratio: 4/3;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 20px var(--shadow);
   background: var(--bg);
@@ -147,11 +116,8 @@ body::before {
   transition: opacity 0.7s ease;
 }
 
-.slider-frame img.active {
-  opacity: 1;
-}
+.slider-frame img.active { opacity: 1; }
 
-/* Arrow buttons */
 .arrow {
   position: absolute;
   top: 50%;
@@ -174,9 +140,7 @@ body::before {
 .arrow:hover { background: rgba(0,0,0,0.6); }
 .arrow.left  { left: 10px; }
 .arrow.right { right: 10px; }
-.arrow.hidden { display: none; }
 
-/* Dots */
 .dots {
   display: flex;
   justify-content: center;
@@ -191,12 +155,8 @@ body::before {
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
-.dot.active {
-  background: var(--gold);
-  transform: scale(1.3);
-}
+.dot.active { background: var(--gold); transform: scale(1.3); }
 
-/* ── Ornament line ── */
 .ornament {
   display: flex;
   align-items: center;
@@ -210,15 +170,10 @@ body::before {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
 }
-.ornament-symbol {
-  color: var(--gold);
-  font-size: 13px;
-  letter-spacing: 4px;
-}
+.ornament span { color: var(--gold); font-size: 13px; letter-spacing: 4px; }
 
-/* ── Name ── */
 h1 {
-  font-family: var(--font-display);
+  font-family: var(--font-d);
   font-size: clamp(1.4rem, 5vw, 1.9rem);
   font-weight: 400;
   letter-spacing: 0.12em;
@@ -229,65 +184,67 @@ h1 {
   animation: fadeIn 1.8s ease both;
 }
 
-/* ── Dates ── */
 .dates {
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  letter-spacing: 0.18em;
+  font-family: var(--font-b);
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
   color: var(--text-soft);
-  margin-bottom: 0;
   font-style: italic;
   animation: fadeIn 1.9s ease both;
 }
 
-/* ── Text ── */
-.text {
-  font-family: var(--font-body);
+.venovani {
+  font-family: var(--font-b);
   font-size: 1rem;
   line-height: 1.9;
   color: var(--text-soft);
   font-style: italic;
-  white-space: pre-wrap;
   animation: fadeIn 2s ease both;
 }
 </style>
 </head>
 <body>
 <div class="card" id="card">
-  <span class="card-corner-bl"></span>
-  <span class="card-corner-br"></span>
+  <span class="corner tl">&#10022;</span>
+  <span class="corner tr">&#10022;</span>
+  <span class="corner bl">&#10022;</span>
+  <span class="corner br">&#10022;</span>
 </div>
 
 <script src="config.js"></script>
 <script>
 (function () {
   var c = CONFIG;
-
-  // Apply theme & font
-  var tema  = c.tema  === 'tmavy' ? 'tmavy' : 'svetly';
-  var pismo = ['klasicke','elegantni','moderni'].includes(c.pismo) ? c.pismo : 'elegantni';
-  document.body.classList.add(tema, 'pismo-' + pismo);
-  document.title = c.jmeno;
+  var tema  = (c.tema === 'tmavy') ? 'tmavy' : 'svetly';
+  var pismo = (['klasicke','elegantni','moderni'].indexOf(c.pismo) >= 0) ? c.pismo : 'elegantni';
+  document.body.className = tema + ' pismo-' + pismo;
+  document.title = c.jmeno || 'Pietni stranka';
 
   var card = document.getElementById('card');
-  var html = '';
+  var corners = card.innerHTML;
+  var html = corners;
 
-  // Symbol
-  html += '<div class="symbol">✝ · ✝</div>';
+  // Kriz - textovy symbol bez emoji
+  html += '<div class="symbol">\u271D \u00B7 \u271D</div>';
 
-  // Slider
-  var fotky = (c.fotky || []).filter(Boolean);
+  // Fotky
+  var fotky = [];
+  if (c.fotky && c.fotky.length) {
+    for (var x = 0; x < c.fotky.length; x++) {
+      if (c.fotky[x]) fotky.push(c.fotky[x]);
+    }
+  }
+
   if (fotky.length > 0) {
-    html += '<div class="slider-wrap">';
-    html += '<div class="slider-frame" id="slider-frame">';
+    html += '<div class="slider-wrap"><div class="slider-frame" id="sf">';
     for (var i = 0; i < fotky.length; i++) {
-      html += '<img src="' + fotky[i] + '" alt="' + c.jmeno + '"' + (i === 0 ? ' class="active"' : '') + ' />';
+      html += '<img src="' + fotky[i] + '" alt=""' + (i === 0 ? ' class="active"' : '') + '>';
     }
     html += '</div>';
     if (fotky.length > 1) {
-      html += '<button class="arrow left" id="arr-left" onclick="slide(-1)">&#8592;</button>';
-      html += '<button class="arrow right" id="arr-right" onclick="slide(1)">&#8594;</button>';
-      html += '<div class="dots" id="dots">';
+      html += '<button class="arrow left" id="al" onclick="slide(-1)">&#8592;</button>';
+      html += '<button class="arrow right" id="ar" onclick="slide(1)">&#8594;</button>';
+      html += '<div class="dots">';
       for (var j = 0; j < fotky.length; j++) {
         html += '<div class="dot' + (j === 0 ? ' active' : '') + '" onclick="goTo(' + j + ')"></div>';
       }
@@ -297,71 +254,51 @@ h1 {
   }
 
   // Ornament
-  html += '<div class="ornament"><span class="ornament-symbol">· · ·</span></div>';
+  html += '<div class="ornament"><span>\u00B7 \u00B7 \u00B7</span></div>';
 
-  // Name
-  html += '<h1>' + c.jmeno + '</h1>';
+  // Jmeno
+  html += '<h1>' + (c.jmeno || '') + '</h1>';
 
-  // Dates
+  // Datumy
   var d = '';
   if (c.narozeni) d += '* ' + c.narozeni;
-  if (c.narozeni && c.umrti) d += '\u2003\u2014\u2003';
+  if (c.narozeni && c.umrti) d += '  ~  ';
   if (c.umrti) d += '\u2020 ' + c.umrti;
   if (d) html += '<div class="dates">' + d + '</div>';
 
-  // Text
+  // Venovani
   if (c.text) {
-    html += '<div class="ornament" style="margin-top:18px"><span class="ornament-symbol">· · ·</span></div>';
-    html += '<div class="text">' + c.text.replace(/\n/g, '<br>') + '</div>';
+    html += '<div class="ornament" style="margin-top:18px"><span>\u00B7 \u00B7 \u00B7</span></div>';
+    html += '<div class="venovani">' + c.text.replace(/\n/g, '<br>') + '</div>';
   }
 
-  // Inject (keep corner spans)
-  var corners = card.querySelectorAll('.card-corner-bl, .card-corner-br');
   card.innerHTML = html;
-  corners.forEach(function(el) { card.appendChild(el); });
 
-  // Slider logic
-  var current = 0;
-  var imgs, dots, total;
-
-  function initSlider() {
-    imgs  = document.querySelectorAll('#slider-frame img');
-    dots  = document.querySelectorAll('.dots .dot');
-    total = imgs.length;
-    updateArrows();
-  }
+  // Slider logika
+  var cur = 0;
+  var imgs = document.querySelectorAll('#sf img');
+  var dotsEl = document.querySelectorAll('.dot');
+  var total = imgs.length;
 
   function goTo(n) {
-    if (!imgs) return;
-    imgs[current].classList.remove('active');
-    if (dots[current]) dots[current].classList.remove('active');
-    current = (n + total) % total;
-    imgs[current].classList.add('active');
-    if (dots[current]) dots[current].classList.add('active');
-    updateArrows();
+    imgs[cur].classList.remove('active');
+    if (dotsEl[cur]) dotsEl[cur].classList.remove('active');
+    cur = (n + total) % total;
+    imgs[cur].classList.add('active');
+    if (dotsEl[cur]) dotsEl[cur].classList.add('active');
   }
 
-  function updateArrows() {
-    var l = document.getElementById('arr-left');
-    var r = document.getElementById('arr-right');
-    if (!l || !r) return;
-    l.classList.toggle('hidden', total <= 1);
-    r.classList.toggle('hidden', total <= 1);
-  }
+  window.goTo = goTo;
+  window.slide = function(dir) { goTo(cur + dir); };
 
-  window.slide = function(dir) { goTo(current + dir); };
-  window.goTo  = goTo;
-
-  if (fotky.length > 1) initSlider();
-
-  // Swipe support
-  var touchX = null;
-  document.addEventListener('touchstart', function(e) { touchX = e.touches[0].clientX; });
+  // Swipe
+  var tx = null;
+  document.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; });
   document.addEventListener('touchend', function(e) {
-    if (touchX === null) return;
-    var dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 40) slide(dx < 0 ? 1 : -1);
-    touchX = null;
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) window.slide(dx < 0 ? 1 : -1);
+    tx = null;
   });
 
 })();
