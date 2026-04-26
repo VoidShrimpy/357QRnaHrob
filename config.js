@@ -21,7 +21,7 @@ var CONFIG = {
 
   // --- Symbol nahoře ---
   // Moznosti: "kriz" / "kriz2" / "hvezda" / "bez"
-  symbol: "kriz",
+  symbol: "kriz2",
 
   // --- Téma ---
   // "svetly" nebo "tmavy"
@@ -29,11 +29,11 @@ var CONFIG = {
 
   // --- Písmo ---
   // "klasicke" / "elegantni" / "moderni"
-  pismo: "elegantni",
+  pismo: "moderni",
 
   // --- Barva rámečku ---
   // "zlata" / "stribrna" / "bila" / "cerna"
-  ramecek: "zlata",
+  ramecek: "stribrna",
 
   // --- Vlastní barvy (nepovinné, přepíší téma) ---
   // Zakomentujte řádek (přidejte // na začátek) pokud nechcete vlastní barvy
