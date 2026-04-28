@@ -17,7 +17,7 @@ var CONFIG = {
   ],
 
   // Ořez fotky: "center" / "top" / "20%" atd.
-  fotkaOrez: "center%",
+  fotkaOrez: "center",
 
   // Zaoblení rohů fotky (px): 0 = ostré, 4 = mírné, 10 = více
   fotkaZaobleni: 5,
