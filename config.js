@@ -17,10 +17,10 @@ var CONFIG = {
   ],
 
   // Ořez fotky: "center" / "top" / "20%" atd.
-  fotkaOrez: "10%",
+  fotkaOrez: "center%",
 
   // Zaoblení rohů fotky (px): 0 = ostré, 4 = mírné, 10 = více
-  fotkaZaobleni: 4,
+  fotkaZaobleni: 5,
 
   // ============================================================
   //  STYL STRÁNKY
@@ -57,7 +57,7 @@ var CONFIG = {
   //  ROHY KARTY
   // ============================================================
   // "tecka" / "kvetina" / "kriz" / "bez"
-  rohTvar: "tecka",
+  rohTvar: "diamant",
 
   // "vsechny" / "jen_nahore" / "jen_dole" / "bez"
   rohPoloha: "vsechny",
