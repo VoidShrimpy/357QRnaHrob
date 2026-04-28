@@ -36,7 +36,7 @@ var CONFIG = {
   // "oblouk"   = oblá horní hrana jako náhrobek (výchozí)
   // "rovny"    = rovné hrany, parte styl
   // "goticky"  = špičatý oblouk nahoře
-  tvarKarty: "rovný",
+  tvarKarty: "rovny",
 
   // ============================================================
   //  SYMBOL NAD FOTKOU
