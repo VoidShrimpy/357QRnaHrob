@@ -17,10 +17,10 @@ var CONFIG = {
   ],
 
   // Ořez fotky: "center" / "top" / "20%" atd.
-  fotkaOrez: "20%",
+  fotkaOrez: "10%",
 
   // Zaoblení rohů fotky (px): 0 = ostré, 4 = mírné, 10 = více
-  fotkaZaobleni: 3,
+  fotkaZaobleni: 4,
 
   // ============================================================
   //  STYL STRÁNKY
@@ -28,7 +28,7 @@ var CONFIG = {
   // "granit"   = tmavý, leštěná žula, zlaté detaily (výchozí)
   // "mramor"   = světlý, mramorový, zlaté detaily
   // "noc"      = velmi tmavý, stříbrno-zlatý
-  stil: "mramor",
+  stil: "granit",
 
   // ============================================================
   //  TVAR KARTY
